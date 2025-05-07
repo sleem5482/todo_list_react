@@ -22,7 +22,7 @@ export default function MyTask({ props, showDelete, showUpdate }) {
     // const [updatedTodo,setUpdatedTodo]=useState({title: props.title,details:props.details})
     function handleCompleted(id) {
         //handle check click
-        dispatch({ type: "toggleCompleted", payload:  props  });
+        dispatch({ type: "toggleCompleted", payload: props });
         todos.map((e) => {
             if (e.id === id) {
                 if (e.isCompleted === false) {

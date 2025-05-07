@@ -13,10 +13,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useToast } from "../Contexts/toastContext";
-import { useState, useEffect, useMemo , useReducer} from "react";
+import { useState, useEffect, useMemo, useReducer } from "react";
 import Reducer from "../Reducers/todosReducer";
 // import { type } from "@testing-library/user-event/dist/type";
-
 
 const theme = createTheme({
     typography: {
@@ -33,9 +32,9 @@ const theme = createTheme({
 });
 
 export default function TodoComponent() {
-    const {todos,dispatch}=useContext(TodosContext)//use context with reducer
+    const { todos, dispatch } = useContext(TodosContext); //use context with reducer
     // const [todos, dispatch]=useReducer(Reducer,[])
-    const {showHideToast}=useToast()
+    const { showHideToast } = useToast();
     const [propsTodo, setPropsTodo] = useState(null);
     const [updatedTodo, setUpdatedTodo] = useState({});
     const [titleInput, setTitleInput] = useState("");
@@ -70,14 +69,14 @@ export default function TodoComponent() {
     // create use Effect to load the localStorage when first reRendering
     useEffect(() => {
         // console.log("will call it in first rerender only")
-       dispatch({type:"get"}); //reducer
+        dispatch({ type: "get" }); //reducer
     }, []); //will add two parameter first to do this function and second about dependences as when can reRender this
 
     function changeDisplayedType(e) {
         setDisplayedTodosType(e.target.value);
     }
     function handleAddClick() {
-        dispatch({type:"added",payload:{newTitle:titleInput}})
+        dispatch({ type: "added", payload: { newTitle: titleInput } });
         // localStorage.setItem("todos", JSON.stringify(updatedTodos));
         setTitleInput("");
         showHideToast("add Task successfully");
@@ -91,9 +90,9 @@ export default function TodoComponent() {
         setShowDeleteAlert(false);
     }
     function handleDeleteConfirm() {
-        dispatch({type:"deleted",payload:propsTodo})
+        dispatch({ type: "deleted", payload: propsTodo });
         setShowDeleteAlert(false);
-        showHideToast("Deleted Successfully")
+        showHideToast("Deleted Successfully");
     }
 
     function showUpdateDialog(props) {
@@ -105,10 +104,10 @@ export default function TodoComponent() {
         setShowUpdateAlert(false);
     }
     function handleUpdateConfirm() {
-        console.log(propsTodo)
-        dispatch({type:"updated",payload:updatedTodo})
+        console.log(propsTodo);
+        dispatch({ type: "updated", payload: updatedTodo });
         setShowUpdateAlert(false);
-        showHideToast("Updated Successfully")
+        showHideToast("Updated Successfully");
     }
     // const storageTodos= JSON.parse(localStorage.getItem("todos"))
     // setTodos(storageTodos)  //this will setTodos after all reRendering will create an infinite loop
